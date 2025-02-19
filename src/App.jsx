@@ -1,0 +1,25 @@
+import NavBar from "./components/navbar/NavBar";
+import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { Offline } from "react-detect-offline";
+import { Box } from "@mui/material";
+import Alert from "@mui/material/Alert";
+function App() {
+  return (
+    <>
+      <NavBar />
+      <Toaster />
+
+      <Outlet />
+      <Offline>
+        <Box sx={{ margin: "30px auto", width: "50%" }}>
+          <Alert variant="outlined" severity="error">
+            Please Connect To Network
+          </Alert>
+        </Box>
+      </Offline>
+    </>
+  );
+}
+
+export default App;
