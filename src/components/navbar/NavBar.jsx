@@ -17,21 +17,15 @@ import Tooltip from "@mui/material/Tooltip";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { logout } from "../../RTK/Slices/userTokenSlice";
-import { fetchCartData } from "./../../RTK/Slices/cartSlicewithAPI";
-import { useEffect } from "react";
 import useGetData from "./../../Hooks/wishList/useGetData";
 import useCart from "./../../Hooks/useCart";
 
 function NavBar() {
   const adminToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YTRhNzYxNTE4MTUxZDgwM2QyMTlhNyIsIm5hbWUiOiJJYnJhaGltIEVsdGJha2giLCJyb2xlIjoidXNlciIsImlhdCI6MTczOTgwODM5NiwiZXhwIjoxNzQ3NTg0Mzk2fQ.0HZZSgn7lLVnmOQMBnS_SR2VBLFfGPTnC8NC8-hOGrQ";
-  // const cart = useSelector((state) => state.cart.products);
   const { data: productsInCart } = useCart();
   let cart = productsInCart?.data?.products;
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchCartData());
-  }, []);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const user = useSelector((state) => state.userToken);
@@ -93,6 +87,7 @@ function NavBar() {
       sx={{
         backgroundColor: "#fff",
         color: "teal",
+        borderBottom: "1px solid teal",
       }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
