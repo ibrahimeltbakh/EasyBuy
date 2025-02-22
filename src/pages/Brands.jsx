@@ -1,19 +1,11 @@
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchProducts } from "../../RTK/Slices/productsSlice";
-import Container from "@mui/material/Container";
-import ProductCard from "../../components/Cards/ProductCard";
 import { Stack } from "@mui/material";
+import Container from "@mui/material/Container";
 import { RiseLoader } from "react-spinners";
-import useProducts from "../../Hooks/useProducts";
 import { Helmet } from "react-helmet";
-const ProductsPage = () => {
-  // const products = useSelector((state) => state.products);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchProducts());
-  // }, []);
-  const { data, isLoading, isError, error } = useProducts();
+import useBrands from "../Hooks/useBrands";
+import BrandsCard from "../components/Cards/BrandsCard";
+const Brands = () => {
+  const { data, isLoading, isError, error } = useBrands();
   if (isError) {
     return (
       <>
@@ -23,6 +15,7 @@ const ProductsPage = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: "30px",
+            color: "Teal",
           }}>
           <h3>{error}</h3>
         </Stack>
@@ -47,10 +40,10 @@ const ProductsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Products | EasyBuy</title>
+        <title>Brands | EasyBuy</title>
         <meta
           name="description"
-          content="Browse a wide range of products at EasyBuy. Shop your favorites now!"
+          content="Browse a wide range of Brands at EasyBuy. Shop your favorites now!"
         />
       </Helmet>
 
@@ -66,8 +59,8 @@ const ProductsPage = () => {
             alignItems: "center",
             gap: "30px",
           }}>
-          {data?.data.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {data?.data.map((brand) => (
+            <BrandsCard key={brand._id} brand={brand} />
           ))}
         </Stack>
       </Container>
@@ -75,4 +68,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default Brands;

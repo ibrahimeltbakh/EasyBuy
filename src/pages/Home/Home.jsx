@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
-import CategoriesSlider from "../../components/categories/CategoriesSlider";
+import CategoriesSlider from "../../components/Sliders/CategoriesSlider";
 import RecentProducts from "../../components/recent Products/RecentProducts";
-import MainSlider from "../../components/mainSlider/MainSlider";
+import MainSlider from "../../components/Sliders/MainSlider";
 import { Helmet } from "react-helmet";
 const Home = () => {
   return (

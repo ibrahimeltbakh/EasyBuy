@@ -14,16 +14,20 @@ import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import Tooltip from "@mui/material/Tooltip";
-// import Avatar from "@mui/material/Avatar";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { logout } from "../../RTK/Slices/userTokenSlice";
 import { fetchCartData } from "./../../RTK/Slices/cartSlicewithAPI";
 import { useEffect } from "react";
+import useGetData from "./../../Hooks/wishList/useGetData";
+import useCart from "./../../Hooks/useCart";
 
 function NavBar() {
   const adminToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YTRhNzYxNTE4MTUxZDgwM2QyMTlhNyIsIm5hbWUiOiJJYnJhaGltIEVsdGJha2giLCJyb2xlIjoidXNlciIsImlhdCI6MTczOTgwODM5NiwiZXhwIjoxNzQ3NTg0Mzk2fQ.0HZZSgn7lLVnmOQMBnS_SR2VBLFfGPTnC8NC8-hOGrQ";
-  const cart = useSelector((state) => state.cart.products);
+  // const cart = useSelector((state) => state.cart.products);
+  const { data: productsInCart } = useCart();
+  let cart = productsInCart?.data?.products;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCartData());
@@ -54,9 +58,12 @@ function NavBar() {
       padding: "0 4px",
     },
   }));
+  const { data } = useGetData();
   const pages = [
     { title: "Home", path: "/" },
     { title: "Products", path: "Products" },
+    { title: "Categories", path: "categories" },
+    { title: "Brands", path: "brands" },
     {
       title: (
         <StyledBadge badgeContent={cart?.length} color="error">
@@ -64,6 +71,14 @@ function NavBar() {
         </StyledBadge>
       ),
       path: "/cart",
+    },
+    {
+      title: (
+        <StyledBadge badgeContent={data?.count} color="error">
+          <BookmarkIcon />
+        </StyledBadge>
+      ),
+      path: "/wish",
     },
   ];
   const settings = [
@@ -76,7 +91,7 @@ function NavBar() {
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: "#eee",
+        backgroundColor: "#fff",
         color: "teal",
       }}>
       <Container maxWidth="xl">
@@ -125,7 +140,7 @@ function NavBar() {
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: "block", md: "none" } }}>
                 {pages.map((page) => (
-                  <Link key={page.title} to={"/"}>
+                  <Link key={page.path} to={"/"}>
                     <MenuItem onClick={handleCloseNavMenu}>
                       <Typography
                         sx={{
@@ -169,7 +184,7 @@ function NavBar() {
               pages.map((page) => (
                 <Link
                   className="page"
-                  key={page.title}
+                  key={page.path}
                   to={page.path}
                   onClick={handleCloseNavMenu}>
                   {page.title}
@@ -181,7 +196,6 @@ function NavBar() {
               <IconButton
                 onClick={handleOpenUserMenu}
                 sx={{ p: 2, color: "teal" }}>
-                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
                 <AccountCircle sx={{ width: "40px", height: "40px" }} />
               </IconButton>
             </Tooltip>

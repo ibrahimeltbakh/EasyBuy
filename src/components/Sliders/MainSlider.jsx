@@ -2,11 +2,11 @@ import { Box, Stack } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import img1 from "../../assets/1.jpg";
-import img2 from "../../assets/2.jpg";
-import img3 from "../../assets/4.jpg";
-import img4 from "../../assets/6.jpg";
-import img5 from "../../assets/7.jpg";
+import img1 from "../../assets/16.jpg";
+import img2 from "../../assets/17.jpg";
+import img3 from "../../assets/18.jpg";
+import img4 from "../../assets/banner-15.jpg";
+import img5 from "../../assets/banner-25.jpg";
 const MainSlider = () => {
   var settings = {
     dots: false,
@@ -18,19 +18,24 @@ const MainSlider = () => {
     autoplaySpeed: 3000,
     arrows: false,
   };
-  const imgs = [img3, img4, img5];
+  const mainImages = [img4, img5];
+  const sideImages = [img1, img2, img3];
   return (
     <Stack
       sx={{
-        height: "400px",
+        height: "500px",
         flexDirection: "row",
         marginBottom: "30px",
         alignItems: "center",
         overflow: "hidden",
       }}>
-      <Box sx={{ width: "80%", height: "100%" }}>
+      <Box
+        sx={{
+          width: { xs: "100%", md: "80%" },
+          height: "100%",
+        }}>
         <Slider {...settings} style={{ width: "100%", height: "100%" }}>
-          {imgs.map((img, index) => (
+          {mainImages.map((img, index) => (
             <Box key={index} sx={{ width: "100%", height: "100%" }}>
               <img
                 style={{
@@ -48,19 +53,20 @@ const MainSlider = () => {
       <Box
         sx={{
           width: "20%",
-          display: "flex",
+          height: "100%",
           flexDirection: "column",
+          display: { xs: "none", md: "flex" },
         }}>
-        <img
-          style={{ width: "100%", height: "50%", objectFit: "cover" }}
-          src={img1}
-          alt="img1"
-        />
-        <img
-          style={{ width: "100%", height: "50%", objectFit: "cover" }}
-          src={img2}
-          alt="img2"
-        />
+        {sideImages.map((img, index) => {
+          return (
+            <img
+              key={index}
+              style={{ width: "100%", height: "35%", objectFit: "cover" }}
+              src={img}
+              alt="img"
+            />
+          );
+        })}
       </Box>
     </Stack>
   );

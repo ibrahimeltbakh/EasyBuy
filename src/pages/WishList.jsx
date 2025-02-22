@@ -1,19 +1,12 @@
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchProducts } from "../../RTK/Slices/productsSlice";
-import Container from "@mui/material/Container";
-import ProductCard from "../../components/Cards/ProductCard";
+import useGetData from "../Hooks/wishList/useGetData";
 import { Stack } from "@mui/material";
 import { RiseLoader } from "react-spinners";
-import useProducts from "../../Hooks/useProducts";
 import { Helmet } from "react-helmet";
-const ProductsPage = () => {
-  // const products = useSelector((state) => state.products);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchProducts());
-  // }, []);
-  const { data, isLoading, isError, error } = useProducts();
+import { Container } from "@mui/material";
+import ProductCard from "./../components/Cards/ProductCard";
+
+const WishList = () => {
+  const { data, isError, error, isLoading } = useGetData();
   if (isError) {
     return (
       <>
@@ -23,6 +16,7 @@ const ProductsPage = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: "30px",
+            color: "Teal",
           }}>
           <h3>{error}</h3>
         </Stack>
@@ -44,20 +38,33 @@ const ProductsPage = () => {
       </>
     );
   }
+  if (data?.count === 0) {
+    return (
+      <>
+        <Stack
+          sx={{
+            marginTop: "150px",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "30px",
+            color: "Teal",
+          }}>
+          <h2>Your wishlist is empty</h2>
+        </Stack>
+      </>
+    );
+  }
+
   return (
     <>
       <Helmet>
-        <title>Products | EasyBuy</title>
+        <title> WishList Products| EasyBuy</title>
         <meta
           name="description"
-          content="Browse a wide range of products at EasyBuy. Shop your favorites now!"
+          content="Browse a wide range of WishList at EasyBuy. Shop your favorites now!"
         />
       </Helmet>
-
-      <Container
-        sx={{
-          mt: "100px",
-        }}>
+      <Container sx={{ mt: "100px" }}>
         <Stack
           sx={{
             flexDirection: "row",
@@ -67,7 +74,7 @@ const ProductsPage = () => {
             gap: "30px",
           }}>
           {data?.data.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </Stack>
       </Container>
@@ -75,4 +82,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default WishList;

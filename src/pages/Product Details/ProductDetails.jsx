@@ -2,33 +2,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Rating from "@mui/material/Rating";
-import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Box, Container, Stack } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { fetchProducts } from "../../RTK/Slices/productsSlice";
-import ProductCard from "../../components/product/ProductCard";
-import { addProductToCart } from "../../RTK/Slices/cartSlicewithAPI";
+import ProductCard from "../../components/Cards/ProductCard";
 import { Helmet } from "react-helmet";
+import ButtonsAction from "../../components/Buttons Actions/ButtonsAction";
 const ProductDetails = () => {
   const { id, category } = useParams();
   const dispatch = useDispatch();
   let [product, setProduct] = useState({});
   const allProducts = useSelector((state) => state.products);
-  function handelAddProduct(event, productId) {
-    event.preventDefault();
-    event.stopPropagation();
-    dispatch(addProductToCart(productId));
-  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,7 +41,6 @@ const ProductDetails = () => {
   const sameCategories = allProducts.filter(
     (product) => product.category.name === category
   );
-
   var settings = {
     dots: true,
     infinite: true,
@@ -70,7 +60,6 @@ const ProductDetails = () => {
           content="Browse a wide range of products at EasyBuy. Shop your favorites now!"
         />
       </Helmet>
-
       <Container sx={{ mt: "100px" }}>
         <Card
           sx={{
@@ -147,36 +136,25 @@ const ProductDetails = () => {
                 </Box>
               </Box>
             </CardContent>
-            <CardActions>
-              <Button
-                onClick={(event) => handelAddProduct(event, product.id)}
-                sx={{
-                  width: "100%",
-                  color: "teal",
-                  textTransform: "capitalize",
-                  borderColor: "teal",
-                  "&:hover": { backgroundColor: "teal", color: "#fff" },
-                }}
-                size="large"
-                variant="outlined"
-                color="error">
-                <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                Add To Cart
-              </Button>
-            </CardActions>
+            <ButtonsAction product={product} />
           </Box>
         </Card>
-        <Stack
-          sx={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "30px",
-          }}>
-          {sameCategories.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <Stack sx={{ flexDirection: "column", mt: "30px" }}>
+          <Box sx={{ width: "100%", textAlign: "center", color: "teal" }}>
+            <h2> Products in the Same Category</h2>
+          </Box>
+          <Stack
+            sx={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "30px",
+            }}>
+            {sameCategories.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </Stack>
         </Stack>
       </Container>
     </>

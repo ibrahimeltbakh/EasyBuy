@@ -1,27 +1,18 @@
 // import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-// import {  useSelector } from "react-redux";
-import { fetchCategories } from "../../RTK/Slices/categoriesSlice";
+// import {  useSelector,useDispatch } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Stack, Typography } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import RiseLoader from "./../../../node_modules/react-spinners/esm/RiseLoader";
+import { RiseLoader } from "react-spinners";
+import usecatergories from "./../../Hooks/usecatergories";
 const CategoriesSlider = () => {
-  const dispatch = useDispatch();
   // const catergories = useSelector((state) => state.categories);
   // useEffect(() => {
   //   dispatch(fetchCategories());
   // }, []);
-  const { data, isLoading } = useQuery({
-    queryKey: ["catergories"],
-    queryFn: async () => {
-      const res = await dispatch(fetchCategories());
-      return res.payload;
-    },
-    staleTime: 10000,
-  });
+  const { data, isLoading, isError, error } = usecatergories();
+
   var settings = {
     dots: true,
     infinite: true,
@@ -31,7 +22,46 @@ const CategoriesSlider = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+    ],
   };
+  if (isError) {
+    return (
+      <>
+        <Stack
+          sx={{
+            marginTop: "150px",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "30px",
+            color: "error",
+          }}>
+          <h3>{error}</h3>
+        </Stack>
+      </>
+    );
+  }
   if (isLoading) {
     return (
       <>
@@ -49,7 +79,7 @@ const CategoriesSlider = () => {
   return (
     <Box>
       <Slider {...settings}>
-        {data.data.map((catergory, index) => (
+        {data?.data.map((catergory, index) => (
           <Stack key={index}>
             <img
               style={{ maxWidth: "100%", height: "200px" }}

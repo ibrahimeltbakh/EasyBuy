@@ -9,9 +9,9 @@ const useProducts = () => {
       const response = await dispatch(fetchRecentProducts());
       return response.payload;
     },
-    //   refetchInterval:3000,
-    //   refetchIntervalInBackground:true,
+    refetchInterval: 3000,
     staleTime: 10000,
+    //   refetchIntervalInBackground:true,
     //   retry:6,
     //   retryDelay:5000,
     //   gcTime:5000,

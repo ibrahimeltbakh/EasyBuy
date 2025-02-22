@@ -1,8 +1,8 @@
 // import { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import { Stack } from "@mui/material";
-import ProductCard from "./../product/ProductCard";
-import RiseLoader from "./../../../node_modules/react-spinners/esm/RiseLoader";
+import ProductCard from "../Cards/ProductCard";
+import { RiseLoader } from "react-spinners";
 import useProducts from "../../Hooks/useProducts";
 
 const RecentProducts = () => {
@@ -22,6 +22,7 @@ const RecentProducts = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: "30px",
+            color: "teal",
           }}>
           <h3>{error}</h3>
         </Stack>

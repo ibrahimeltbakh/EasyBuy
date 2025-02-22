@@ -1,34 +1,13 @@
 import { Box, Stack } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import { useDispatch } from "react-redux";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import StarIcon from "@mui/icons-material/Star";
-import { addProductToCart } from "../../RTK/Slices/cartSlicewithAPI";
-import { useState } from "react";
-export default function ProductCard({ product }) {
-  const dispatch = useDispatch();
-  const [btnLoading, setBtnLoading] = useState(false);
-  async function handelAddProduct(event, productId) {
-    setBtnLoading(true);
-    event.preventDefault();
-    event.stopPropagation();
 
-    const response = await dispatch(addProductToCart(productId));
-    if (response) {
-      setBtnLoading(false);
-      toast.success("Product Added Successfuly", {
-        duration: 4000,
-        position: "bottom-right",
-      });
-    }
-  }
+import ButtonsAction from "../Buttons Actions/ButtonsAction";
+export default function ProductCard({ product }) {
   return (
     <Link to={`/productsdetails/${product.id}/${product.category.name}`}>
       <Card
@@ -98,32 +77,7 @@ export default function ProductCard({ product }) {
             </Box>
           </Stack>
         </CardContent>
-        <CardActions
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "10px",
-            mb: "10px",
-            mt: -3,
-          }}>
-          {}
-          <Button
-            onClick={(event) => handelAddProduct(event, product.id)}
-            sx={{
-              color: "teal",
-              textTransform: "capitalize",
-              borderColor: "teal",
-              width: "100%",
-              "&:hover": { backgroundColor: "teal", color: "#fff" },
-            }}
-            loading={btnLoading}
-            size="large"
-            variant="outlined">
-            <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-            Add To Cart
-          </Button>
-        </CardActions>
+        <ButtonsAction product={product} />
       </Card>
     </Link>
   );

@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { Offline } from "react-detect-offline";
 import { Box } from "@mui/material";
 import Alert from "@mui/material/Alert";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
           </Alert>
         </Box>
       </Offline>
+      <Footer />
     </>
   );
 }

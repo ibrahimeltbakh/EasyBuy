@@ -60,7 +60,6 @@ const Login = () => {
         setLoading(false);
         localStorage.setItem("userToken", res.data.token);
         dispatch(setToken(res.data.token));
-
         navigate("/");
         window.location.reload();
       })

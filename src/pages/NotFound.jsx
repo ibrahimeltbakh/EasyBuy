@@ -1,14 +1,11 @@
 import { Stack } from "@mui/material";
 import { Helmet } from "react-helmet";
-const AllOrders = () => {
+import error404 from "../assets/error.svg";
+const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>All Orders | EasyBuy</title>
-        <meta
-          name="description"
-          content="View all your past and current orders on EasyBuy. Track your purchases easily."
-        />
+        <title>NotFound | EasyBuy</title>
       </Helmet>
       <Stack
         sx={{
@@ -18,10 +15,10 @@ const AllOrders = () => {
           gap: "30px",
           color: "Teal",
         }}>
-        <h2>Thank you for shopping with us! Your order has been received.</h2>
+        <img src={error404} alt="notfound" />
       </Stack>
     </>
   );
 };
 
-export default AllOrders;
+export default NotFound;

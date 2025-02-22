@@ -9,13 +9,19 @@ import { store } from "./RTK/store.js";
 import { Provider } from "react-redux";
 import Register from "./pages/Register/Register.jsx";
 import Login from "./pages/login/Login.jsx";
-import ProtextRoutes from "./components/protextRoutes/ProtextRoutes.jsx";
+import ProtectRoutes from "./components/ProtectRoutes/ProtectRoutes.jsx";
 import Products from "./pages/Products/ProductsPage.jsx";
 import ProductDetails from "./pages/Product Details/ProductDetails.jsx";
 import Checkout from "./pages/checkout/Checkout.jsx";
 import AllOrders from "./pages/AllOrders.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Categories from "./pages/Categories.jsx";
+import CategoryDetails from "./pages/CategoryDetails.jsx";
+import Brands from "./pages/Brands.jsx";
+import BrandsDetails from "./pages/BrandsDetails.jsx";
+import WishList from "./pages/WishList.jsx";
+import NotFound from "./pages/NotFound.jsx";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -27,53 +33,94 @@ createRoot(document.getElementById("root")).render(
               <Route
                 path="/"
                 element={
-                  <ProtextRoutes>
+                  <ProtectRoutes>
                     <Home />
-                  </ProtextRoutes>
+                  </ProtectRoutes>
                 }
               />
               <Route
                 path="products"
                 element={
-                  <ProtextRoutes>
+                  <ProtectRoutes>
                     <Products />
-                  </ProtextRoutes>
+                  </ProtectRoutes>
+                }
+              />
+              <Route
+                path="categories"
+                element={
+                  <ProtectRoutes>
+                    <Categories />
+                  </ProtectRoutes>
+                }
+              />
+              <Route
+                path="brands"
+                element={
+                  <ProtectRoutes>
+                    <Brands />
+                  </ProtectRoutes>
                 }
               />
               <Route
                 path="productsdetails/:id/:category"
                 element={
-                  <ProtextRoutes>
+                  <ProtectRoutes>
                     <ProductDetails />
-                  </ProtextRoutes>
+                  </ProtectRoutes>
+                }
+              />
+              <Route
+                path="categoriesdetails/:id"
+                element={
+                  <ProtectRoutes>
+                    <CategoryDetails />
+                  </ProtectRoutes>
+                }
+              />
+              <Route
+                path="brandsdetails/:id"
+                element={
+                  <ProtectRoutes>
+                    <BrandsDetails />
+                  </ProtectRoutes>
                 }
               />
               <Route
                 path="cart"
                 element={
-                  <ProtextRoutes>
+                  <ProtectRoutes>
                     <Cart />
-                  </ProtextRoutes>
+                  </ProtectRoutes>
+                }
+              />
+              <Route
+                path="wish"
+                element={
+                  <ProtectRoutes>
+                    <WishList />
+                  </ProtectRoutes>
                 }
               />
               <Route
                 path="checkout"
                 element={
-                  <ProtextRoutes>
+                  <ProtectRoutes>
                     <Checkout />
-                  </ProtextRoutes>
+                  </ProtectRoutes>
                 }
               />
               <Route
                 path="allorders"
                 element={
-                  <ProtextRoutes>
+                  <ProtectRoutes>
                     <AllOrders />
-                  </ProtextRoutes>
+                  </ProtectRoutes>
                 }
               />
               <Route path="register" element={<Register />} />
               <Route path="login" element={<Login />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </Provider>

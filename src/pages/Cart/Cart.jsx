@@ -90,13 +90,13 @@ const Cart = () => {
       <>
         <Stack
           sx={{
-            my: "100px",
+            my: "150px",
             justifyContent: "center",
             alignItems: "center",
             gap: "30px",
             color: "teal",
           }}>
-          <h2>No Products in Your Cart </h2>
+          <h2>Your cart is empty </h2>
         </Stack>
       </>
     );
@@ -125,7 +125,7 @@ const Cart = () => {
             </TableHead>
             <TableBody>
               {cart.map((product) => (
-                <StyledTableRow key={product.product.id}>
+                <StyledTableRow key={product.product._id}>
                   <StyledTableCell
                     component="th"
                     scope="row"

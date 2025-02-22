@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 
-const ProtextRoutes = (props) => {
+const ProtectRoutes = (props) => {
   if (localStorage.getItem("userToken") !== null) {
     return props.children;
   } else {
@@ -8,4 +8,4 @@ const ProtextRoutes = (props) => {
   }
 };
 
-export default ProtextRoutes;
+export default ProtectRoutes;
