@@ -9,16 +9,21 @@ function App() {
   return (
     <>
       <NavBar />
-      <Toaster />
+      <Box
+        sx={{
+          minHeight: "100vh",
+        }}>
+        <Toaster />
 
-      <Outlet />
-      <Offline>
-        <Box sx={{ margin: "30px auto", width: "50%" }}>
-          <Alert variant="outlined" severity="error">
-            Please Connect To Network
-          </Alert>
-        </Box>
-      </Offline>
+        <Outlet />
+        <Offline>
+          <Box sx={{ margin: "30px auto", width: "50%" }}>
+            <Alert variant="outlined" severity="error">
+              Please Connect To Network
+            </Alert>
+          </Box>
+        </Offline>
+      </Box>
       <Footer />
     </>
   );

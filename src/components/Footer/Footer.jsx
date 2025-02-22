@@ -9,10 +9,10 @@ import amazonPay from "../../assets/amazon.png";
 import payPal from "../../assets/paypal.png";
 const Footer = () => {
   const social = [
-    { icon: <FacebookIcon /> },
-    { icon: <XIcon /> },
-    { icon: <InstagramIcon /> },
-    { icon: <LinkedInIcon /> },
+    { icon: <FacebookIcon />, color: "#1877f2" },
+    { icon: <XIcon />, color: "#14171a" },
+    { icon: <InstagramIcon />, color: "#c13584" },
+    { icon: <LinkedInIcon />, color: "#0a66c2" },
   ];
   const parteners = [masterCard, amazonPay, payPal];
   return (
@@ -27,8 +27,6 @@ const Footer = () => {
         background: "#fff",
         padding: "30px  ",
         marginTop: "40px",
-        position: "static",
-        bottom: 0,
       }}>
       <Stack
         sx={{
@@ -61,7 +59,7 @@ const Footer = () => {
         <Typography variant="body1">Follow Us</Typography>
         <Stack flexDirection={"row"} gap={2}>
           {social.map((page) => (
-            <Link key={page} to="#" style={{ color: "#000" }}>
+            <Link key={page} to="#" style={{ color: `${page.color}` }}>
               {page.icon}
             </Link>
           ))}
