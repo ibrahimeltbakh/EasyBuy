@@ -14,7 +14,7 @@ const Checkout = () => {
   const { orderData, loading } = useSelector((state) => state.checkout);
   const { id: reduxCartId } = useSelector((state) => state.cart);
   const [cartId, setCartId] = useState(reduxCartId || "");
-  const url = "https://eassybuy.netlify.app";
+  const url = "http://localhost:5173";
   const handelCheckout = (id, backUrl, values) => {
     if (!cartId) {
       console.error("Cart Id is midding");

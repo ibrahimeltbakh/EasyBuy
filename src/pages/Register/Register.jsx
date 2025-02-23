@@ -40,7 +40,8 @@ const Register = () => {
         setLoading(false);
         localStorage.setItem("userToken", res.data.token);
         dispatch(setToken(res.data.token));
-        navigate("/login");
+        navigate("/");
+        window.location.reload();
       })
       .catch((res) => {
         setLoading(false);
